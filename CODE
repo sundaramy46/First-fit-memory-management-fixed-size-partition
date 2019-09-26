@@ -1,0 +1,83 @@
+#include <stdio.h>
+
+int main()
+{
+    int nb,np,i,j;
+    printf("enter no of blocks");
+    scanf("%d",&nb);
+    int bsize[nb];
+    printf("Enter the size of each blocks");
+    for (i=0;i<nb;i++)
+    {scanf("%d",&bsize[i]);
+        
+        
+    }
+    printf("Enter no. of process");
+    scanf("%d",&np);
+    int psize[np];
+    printf("ENter the size of each process");
+    for(i=0;i<np;i++)
+    {
+        scanf("%d",&psize[i]);
+    }
+    
+    int k;
+    k=0;
+    int temp_all_pr[np];
+    for (i=0;i<np;i++)
+    {
+        temp_all_pr[i]=0;
+    }
+    int intsum[np],flagblock[nb];
+    for(i=0;i<nb;i++)
+    {
+        flagblock[i]=0;
+    }
+    
+for(i=0;i<np;i++)
+{
+    for(j=0;j<nb;j++)
+    {
+     if(psize[i]<=bsize[j] && flagblock[j]==0 && temp_all_pr[i]==0)
+     {
+         printf("allocated process p[%d] for block   %d\n",i+1,j+1);
+         temp_all_pr[i]=1;
+         flagblock[j]=1;
+         intsum[k]=bsize[j]-psize[i];
+         printf("fragmented size for p[%d]: %d\n",i+1,intsum[k]);
+         k=k+1;
+     }
+     
+    }
+}
+
+int not_all_pr_sum=0;
+int not_all_blo_sum=0;
+for(i=0;i<np;i++)
+{
+    if (temp_all_pr[i]==0)
+    {
+        not_all_pr_sum=not_all_pr_sum + psize[i];
+    }
+    
+}
+for(i=0;i<nb;i++)
+{
+    if(flagblock[i]==0)
+    {
+        not_all_blo_sum=not_all_blo_sum+bsize[i];
+        
+    }
+}
+if(not_all_blo_sum>not_all_pr_sum)
+{
+    printf("external fragmentation:%d\n",not_all_pr_sum);
+}
+int internalfrag=0;
+for(i=0;i<k;i++)
+{
+    internalfrag=internalfrag+intsum[i];
+}
+printf("Internal fragmentation :%d\n",internalfrag);
+    return 0;
+}
