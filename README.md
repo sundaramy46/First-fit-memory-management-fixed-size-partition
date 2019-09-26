@@ -1,2 +1,2 @@
-# First-fit-of-Fixed_size_partition-OS
+# first fit memory managemnet fixed size partition
 Done conceptually such that u can understand.
